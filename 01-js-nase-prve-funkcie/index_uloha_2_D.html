@@ -19,22 +19,7 @@
     <main>
         <section class="cards">
             <ul id="cardList">
-                <li class="sdk">
-                    <h3>Playdate SDK</h3>
-                    <p>Our full development environment, available for Mac, PC, and Linux.
-                    Includes Lua and C APIs, as well as a Simulator for local development, with profiling and more.</p>
-                </li>
-
-                <li class="inside">
-                    <h3>Inside Playdate</h3>
-                    <p>Reference documentation for programming Playdate games.
-                    Covers both <strong>Lua</strong> and <strong>C</strong> programming.</p>
-                </li>
-
-                <li class="caps">
-                    <h3>Caps</h3>
-                    <p>Bitmap font editor for Playdate fonts—draw your own characters, import desktop fonts, kern and preview them.</p>
-                </li>
+               
             </ul>
             <div class="form-container" style="display: flex; justify-content: center; margin-top: 50px; margin-bottom: 50px;">
                 <div class="form" style="display: flex; flex-direction: column; gap: 10px; width: 500px; align-items: center;">
@@ -43,19 +28,29 @@
                     </div>
                     <input type="text" class="text" placeholder="zadaj nejaky nadpis" style="width: 100%; border-radius: 10px; padding: 10px;">
                     <textarea class="textarea" placeholder="zadaj nejaky cooltext" style="width: 100%; border-radius: 10px; padding: 10px;"></textarea>
-                    <button onclick="pridajKartu()" class="button" style="width: 100%; border-radius: 10px; background-color: #6c00ff; color: #fff; padding: 3px; box-shadow: 2px 3px white;">Klikni ma</button>
+                    <button onclick="addCard()" class="button" style="width: 100%; border-radius: 10px; background-color: #6c00ff; color: #fff; padding: 3px; box-shadow: 2px 3px white;">Klikni ma</button>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        // Definuj pole objektov
-        const cardsArray = [
-            { title: "Playdate SDK", content: "Our full development environment, available for Mac, PC, and Linux. Includes Lua and C APIs, as well as a Simulator for local development, with profiling and more." },
-            { title: "Inside Playdate", content: "Reference documentation for programming Playdate games. Covers both Lua and C programming." },
-            { title: "Caps", content: "Bitmap font editor for Playdate fonts—draw your own characters, import desktop fonts, kern and preview them." }
-        ];
+        // Pole na uloženie dát kariet
+        let cardsArray = [];
+
+        // Funkcia na načítanie dát z JSON súboru
+        async function loadData() {
+            try {
+                // Načítanie dát z JSON súboru
+                const result = await fetch('./data.json');
+                cardsArray = await result.json();
+                // console.log('Načítané dáta:', cardsArray);
+                // Vykreslenie kariet po načítaní dát
+                renderCards();
+            } catch (error) {
+                console.error('Chyba pri načítaní dát:', error);
+            }
+        }
 
         // Funkcia na vykreslenie všetkých kariet z poľa
         function renderCards() {
@@ -68,11 +63,12 @@
                 li.innerHTML = `<h3>${card.title}</h3><p>${card.content}</p>`;
                 ul.appendChild(li);
             });
+            console.log('Karty boli vykreslené');
         }
 
         // Funkcia na pridanie novej karty do poľa a znovu vykreslenie kariet
-        function pridajKartu() {
-            console.log('klik');
+        function addCard() {
+            console.log('Pridávanie novej karty');
             const input = document.querySelector('.text').value;
             const textarea = document.querySelector('.textarea').value;
 
@@ -82,13 +78,9 @@
             // Znova vykreslí všetky karty
             renderCards();
         }
-        
 
-        // Načítanie kariet pri otvorení stránky
-        renderCards();
-
-
-
+        // Načítanie dát a vykreslenie kariet pri otvorení stránky
+        loadData(); // Opravené: zmenené z 'nacitajData()' na 'loadData()'
     </script>
 </body>
 

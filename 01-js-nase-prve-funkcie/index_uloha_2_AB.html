@@ -1,0 +1,83 @@
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>PLAYDATE FUN TIMES</title>
+		<link rel="stylesheet" href="./css/app.css">
+		<link rel="stylesheet" href="./css/header.css">
+		<link rel="stylesheet" href="./css/cards.css">
+	</head>
+
+	<body>
+
+		<header>
+			<img src="./images/header-playdate-dev.png" alt="anyone can make games">
+		</header>
+
+		<main>
+			<section class="cards">
+				<ul>
+					<li class="sdk">
+						<h3>Playdate SDK</h3>
+
+						<p>
+							Our full development environment, available for Mac, PC, and Linux.
+							Includes Lua and C APIs, as well as a Simulator for
+							local development, with profiling and more.
+						</p>
+					</li>
+
+					<li class="inside">
+						<h3>Inside Playdate</h3>
+
+						<p>
+							Reference documentation for programming Playdate games.
+							Covers both <strong>Lua</strong> and <strong>C</strong> programming.
+						</p>
+					</li>
+
+					<li class="caps">
+						<h3>Caps</h3>
+
+						<p>
+							Bitmap font editor for Playdate fonts—draw your own characters,
+							import desktop fonts, kern and preview them.
+						</p>
+					</li>
+				</ul>
+				<div class="form-container" style="display: flex; justify-content: center; margin-top: 50px; margin-bottom: 50px;">
+					<div class="form" style="display: flex; flex-direction: column; gap: 10px; width: 500px; align-items: center;">
+						<div class="form-title-container" style="display: flex; justify-content: center; width: 100%; background-color: #6c00ff; border-radius: 10px; padding: 10px;">
+							<h3 class="form-title" style="font-size: 20px; font-weight: 400; ">No tak pridaj maaa</h3>
+						</div>
+						<input type="text" class="text" placeholder="zadaj nejaky nadpis" style="width: 100%; border-radius: 10px; padding: 10px;">
+						<textarea class="textarea" placeholder="zadaj nejaky cooltext" style="width: 100%; border-radius: 10px; padding: 10px;"></textarea>
+						<button onclick="pridajKartu()" class="button" style="width: 100%; border-radius: 10px; background-color: #6c00ff; color: #fff; padding: 3px; box-shadow: 2px 3px white;">Klikni ma</button>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<script>
+
+			
+
+			function pridajKartu() {
+				// console.log('klik');
+				let input = document.querySelector('.text').value;
+				let textarea = document.querySelector('.textarea').value;
+				// console.log(input, textarea);
+				const li = document.createElement('li');
+				li.innerHTML = `<h3>${input}</h3><p>${textarea}</p>`;
+				document.querySelector('ul').appendChild(li);
+
+			}
+		
+
+	</script>
+
+</body>
+
+</html>
